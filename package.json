@@ -1,5 +1,5 @@
 {
-  "name": "sistem-spital",
+  "name": "biblios",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,12 +12,14 @@
     "@supabase/supabase-js": "^2.98.0",
     "@tailwindcss/vite": "^4.2.1",
     "lucide-vue-next": "^0.577.0",
-    "tailwindcss": "^4.2.1",
     "vue": "^3.5.25",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.2",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
     "vite": "^7.3.1"
   }
 }
