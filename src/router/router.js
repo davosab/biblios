@@ -1,11 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Books from '../pages/Books.vue'
 
 const routes = [
-    // {path:'/', redirect:'/patients'}
+    { path: '/', redirect: '/books' },
+    { path: '/books', component: Books }
 ]
 
 const router = createRouter({
-    history: createWebHashHistory('/SistemSpital/'),
+    history: createWebHashHistory('/biblios/'),
     routes
 })
 

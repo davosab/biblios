@@ -16,30 +16,30 @@ const isActive = (mainPath) => {
   if (currentPath === mainPath) return true;
 
   if (
-    mainPath === "/patients" &&
-    (currentPath === "/editPatient" || currentPath === "/addPatient")
+    mainPath === "/books" &&
+    (currentPath === "/editBook" || currentPath === "/addBook")
   )
     return true;
-  if (
-    mainPath === "/appointments" &&
-    (currentPath === "/editAppointment" || currentPath === "/addAppointment")
-  )
-    return true;
-  if (
-    mainPath === "/inventory" &&
-    (currentPath === "/editInventory" || currentPath === "/addInventory")
-  )
-    return true;
-  if (
-    mainPath === "/invoices" &&
-    (currentPath === "/editInvoice" || currentPath === "/addInvoice")
-  )
-    return true;
-  if (
-    mainPath === "/wards" &&
-    (currentPath === "/editWard" || currentPath === "/addWard")
-  )
-    return true;
+  // if (
+  //   mainPath === "/appointments" &&
+  //   (currentPath === "/editAppointment" || currentPath === "/addAppointment")
+  // )
+  //   return true;
+  // if (
+  //   mainPath === "/inventory" &&
+  //   (currentPath === "/editInventory" || currentPath === "/addInventory")
+  // )
+  //   return true;
+  // if (
+  //   mainPath === "/invoices" &&
+  //   (currentPath === "/editInvoice" || currentPath === "/addInvoice")
+  // )
+  //   return true;
+  // if (
+  //   mainPath === "/wards" &&
+  //   (currentPath === "/editWard" || currentPath === "/addWard")
+  // )
+  //   return true;
 
   return false;
 };
@@ -51,14 +51,14 @@ const isActive = (mainPath) => {
       <ul class="flex flex-col gap-3">
         <li>
           <router-link
-            to="/patients"
+            to="/books"
             class="li"
-            :class="{ active: isActive('/patients') }"
+            :class="{ active: isActive('/books') }"
           >
             <Users class="icon" /> Books
           </router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link
             to="/appointments"
             class="li"
@@ -93,7 +93,7 @@ const isActive = (mainPath) => {
           >
             <Hospital class="icon" /> Wards
           </router-link>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
