@@ -1,100 +1,78 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { Users } from "lucide-vue-next";
-import { ClipboardClock } from "lucide-vue-next";
-import { ShelvingUnit } from "lucide-vue-next";
-import { Receipt } from "lucide-vue-next";
-import { Hospital } from "lucide-vue-next";
+import { ref, computed } from "vue";
+import { Users, BookOpen, Clock, RotateCw, CheckCircle, LogOut } from "lucide-vue-next";
 
 const route = useRoute();
 
+// Get user role from localStorage
+const userRole = ref(localStorage.getItem('userRole') || 'student');
+
 // Determine if a nav item should be active based on current route
-const isActive = (mainPath) => {
-  const currentPath = route.path;
-
-  // Check if exact match or if edit/add variant of the same category
-  if (currentPath === mainPath) return true;
-
-  if (
-    mainPath === "/books" &&
-    (currentPath === "/editBook" || currentPath === "/addBook")
-  )
-    return true;
-  // if (
-  //   mainPath === "/appointments" &&
-  //   (currentPath === "/editAppointment" || currentPath === "/addAppointment")
-  // )
-  //   return true;
-  // if (
-  //   mainPath === "/inventory" &&
-  //   (currentPath === "/editInventory" || currentPath === "/addInventory")
-  // )
-  //   return true;
-  // if (
-  //   mainPath === "/invoices" &&
-  //   (currentPath === "/editInvoice" || currentPath === "/addInvoice")
-  // )
-  //   return true;
-  // if (
-  //   mainPath === "/wards" &&
-  //   (currentPath === "/editWard" || currentPath === "/addWard")
-  // )
-  //   return true;
-
-  return false;
+const isActive = (path) => {
+  return route.path === path;
 };
+
+const logout = () => {
+  localStorage.removeItem('userRole');
+  localStorage.removeItem('userName');
+  localStorage.removeItem('userEmail');
+  window.location.href = '/#/login';
+};
+
+const librarianLinks = [
+  { label: 'Approvals', icon: CheckCircle, path: '/librarian/approvals' },
+  { label: 'Books', icon: BookOpen, path: '/librarian/books' },
+  { label: 'Loans', icon: Clock, path: '/librarian/loans' },
+  { label: 'Returns', icon: RotateCw, path: '/librarian/returns' },
+];
+
+const studentLinks = [
+  { label: 'Books', icon: BookOpen, path: '/student/books' },
+  { label: 'My Loans', icon: Clock, path: '/student/loans' },
+];
 </script>
 
 <template>
   <div id="menu" class="fixed w-[200px] h-screen bg-surface flex flex-col border-r border-border">
-    <div class="flex flex-col flex-1 justify-between mt-6 px-4">
+    <!-- Header with User Role -->
+    <div class="px-4 pt-6 pb-4">
+      <div class="text-center">
+        <div class="inline-block bg-[#b45309] p-2 rounded-full mb-2">
+          <Users class="w-5 h-5 text-white" v-if="userRole === 'student'" />
+          <CheckCircle class="w-5 h-5 text-white" v-else />
+        </div>
+        <p class="text-xs font-semibold text-[#78716c] uppercase tracking-wide">
+          {{ userRole === 'librarian' ? 'Librarian' : 'Student' }}
+        </p>
+      </div>
+    </div>
+
+    <hr class="border-[#e4ddd4] mx-2" />
+
+    <!-- Navigation Links -->
+    <div class="flex flex-col flex-1 justify-between mt-2 px-2">
       <ul class="flex flex-col gap-2">
-        <li>
+        <li v-for="link in userRole === 'librarian' ? librarianLinks : studentLinks" :key="link.path">
           <router-link
-            to="/books"
+            :to="link.path"
             class="li"
-            :class="{ active: isActive('/books') }"
+            :class="{ active: isActive(link.path) }"
           >
-            <Users class="icon" /> Books
+            <component :is="link.icon" class="icon" />
+            {{ link.label }}
           </router-link>
         </li>
-        <!-- <li>
-          <router-link
-            to="/appointments"
-            class="li"
-            :class="{ active: isActive('/appointments') }"
-          >
-            <ClipboardClock class="icon" /> Appointments
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/inventory"
-            class="li"
-            :class="{ active: isActive('/inventory') }"
-          >
-            <ShelvingUnit class="icon" /> Inventory
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/invoices"
-            class="li"
-            :class="{ active: isActive('/invoices') }"
-          >
-            <Receipt class="icon" /> Invoices
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/wards"
-            class="li"
-            :class="{ active: isActive('/wards') }"
-          >
-            <Hospital class="icon" /> Wards
-          </router-link>
-        </li> -->
       </ul>
+
+      <!-- Logout Button -->
+      <button
+        @click="logout"
+        class="flex items-center gap-3 w-full mx-0 px-4 py-2 text-[#78716c] hover:text-red-600 hover:bg-red-50 rounded-[8px] transition-all text-sm font-semibold mb-4"
+      >
+        <LogOut class="w-4 h-4" />
+        Logout
+      </button>
     </div>
   </div>
 </template>

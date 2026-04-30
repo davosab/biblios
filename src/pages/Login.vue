@@ -17,9 +17,22 @@ const handleLogin = async () => {
   
   try {
     // Add your authentication logic here
-    // For now, just a placeholder
     console.log('Login with:', { email: email.value, password: password.value });
-    // router.push('/books');
+    
+    // Simulate authentication and role retrieval
+    // In a real app, this would come from your backend
+    const mockRole = email.value.includes('librarian') ? 'librarian' : 'student';
+    
+    // Save role to localStorage
+    localStorage.setItem('userRole', mockRole);
+    localStorage.setItem('userEmail', email.value);
+    
+    // Redirect based on role
+    if (mockRole === 'librarian') {
+      router.push('/librarian/approvals');
+    } else {
+      router.push('/student/books');
+    }
   } catch (err) {
     error.value = 'Login failed. Please try again.';
   } finally {

@@ -51,8 +51,21 @@ const handleRegister = async () => {
       password: password.value,
       role: role.value,
     });
-    success.value = 'Registration successful! Redirecting to login...';
-    // setTimeout(() => router.push('/login'), 2000);
+    
+    // Save role to localStorage
+    localStorage.setItem('userRole', role.value);
+    localStorage.setItem('userName', fullName.value);
+    
+    success.value = 'Registration successful! Redirecting...';
+    
+    // Redirect based on role after 1.5 seconds
+    setTimeout(() => {
+      if (role.value === 'librarian') {
+        router.push('/librarian/approvals');
+      } else {
+        router.push('/student/books');
+      }
+    }, 1500);
   } catch (err) {
     error.value = 'Registration failed. Please try again.';
   } finally {
