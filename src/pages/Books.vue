@@ -1,5 +1,5 @@
 <template>
-  <div class="books-page">
+  <div class="books-page ml-[200px]">
     <!-- Header -->
     <header class="page-header">
       <div class="header-left">

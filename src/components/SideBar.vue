@@ -46,9 +46,9 @@ const isActive = (mainPath) => {
 </script>
 
 <template>
-  <div id="menu" class="fixed w-[200px] h-screen bg-[#FFFFFF] flex flex-col">
-    <div class="flex flex-col flex-1 justify-between mt-[25px]">
-      <ul class="flex flex-col gap-3">
+  <div id="menu" class="fixed w-[200px] h-screen bg-surface flex flex-col border-r border-border">
+    <div class="flex flex-col flex-1 justify-between mt-6 px-4">
+      <ul class="flex flex-col gap-2">
         <li>
           <router-link
             to="/books"
@@ -100,42 +100,56 @@ const isActive = (mainPath) => {
 </template>
 
 <style scoped>
-.li {
-  margin-inline: 25px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  font-size: 17px;
-  text-decoration: #2e2e2e;
-  font-weight: 600;
-  padding: 5px 0px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap");
 
-.a {
-  font-size: 17px;
-  margin-inline: 25px;
-  padding-top: 6px;
-  margin-bottom: 20px;
-  padding: 5px 0px;
-  font-weight: 600;
-}
-
-.active {
-  background-color: #e7ffef;
-  color: #56d788;
-  border-radius: 10px;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-left: 19px;
-  margin-right: 5px;
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --border: #e4ddd4;
+  --text-primary: #1c1917;
+  --text-secondary: #78716c;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
 #menu {
-  border-right: 1px solid rgb(219, 216, 216);
+  background: var(--surface) !important;
+  border-right: 1.5px solid var(--border) !important;
+}
+
+.li {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 0.75rem 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  text-decoration: none;
+  margin: 0;
+}
+
+.li:hover {
+  background-color: var(--accent-light);
+  color: var(--accent);
+}
+
+.active {
+  background-color: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
 }
 </style>
